@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChatClient.Net.IO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -22,6 +23,10 @@ namespace ChatClient.Net
             if(!_client.Connected)
             {
                 _client.Connect("127.0.0.1", 7891);
+                var connectPacket = new PacketBuilder();
+                connectPacket.WrteOpCode(0);
+                connectPacket.WriteString(username);
+                _client.Client.Send(connectPacket.GetPoketBytes());
             }
         }
     }
