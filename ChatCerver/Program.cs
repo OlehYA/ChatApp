@@ -19,5 +19,10 @@ namespace ChatCerver
                 _users.Add(client);
             }
         }
+
+        static void BroadcastConnetion()
+        {
+
+        }
     }
 }
