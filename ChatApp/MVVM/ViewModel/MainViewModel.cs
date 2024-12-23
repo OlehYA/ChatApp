@@ -35,7 +35,7 @@ namespace ChatClient.MVVM.ViewModel
             _server.userDisconnectEvent += RemoveUser; ;
             ConnectToServerCommand = new RelayCommand(o => _server.ConnectToServer(Username), o => !string.IsNullOrEmpty(Username));
 
-            SendMassegwCommand = new RelayCommand(o => _server.ConnectToServer(Message), o=> !string.IsNullOrEmpty(Message));
+            SendMassegwCommand = new RelayCommand(o => _server.SendMessageToServer(Message), o=> !string.IsNullOrEmpty(Message));
         }
 
         private void RemoveUser()

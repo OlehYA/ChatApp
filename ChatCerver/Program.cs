@@ -52,6 +52,7 @@ namespace ChatCerver
         public static void BroadcastDisconnect(string uid)
         {
             var disconnectedUser = _users.Where(x=> x.UID.ToString()== uid).FirstOrDefault();
+            _users.Remove(disconnectedUser);
 
             foreach (var user in _users)
             {
