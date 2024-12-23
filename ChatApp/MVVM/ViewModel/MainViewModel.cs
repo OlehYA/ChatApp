@@ -31,7 +31,7 @@ namespace ChatClient.MVVM.ViewModel
             Messages = new ObservableCollection<string>();
             _server= new Server();
             _server.connectedEvent += UserConnected;
-            _server.msgReceivedEvent += UserConnected;
+            _server.msgReceivedEvent += MessageReceived;
             _server.userDisconnectEvent += RemoveUser; ;
             ConnectToServerCommand = new RelayCommand(o => _server.ConnectToServer(Username), o => !string.IsNullOrEmpty(Username));
 
