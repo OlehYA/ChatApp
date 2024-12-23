@@ -48,5 +48,20 @@ namespace ChatCerver
                 user.ClientSocket.Client.Send(msgPacket.GetPoketBytes());
             }
         }
+
+        public static void BroadcastDisconnect(string uid)
+        {
+            var disconnectedUser = _users.Where(x=> x.UID.ToString()== uid).FirstOrDefault();
+
+            foreach (var user in _users)
+            {
+                var broadcastPacket = new PacketBuilder();
+                broadcastPacket.WrteOpCode(10);
+                broadcastPacket.WriteMessage(uid);
+                user.ClientSocket.Client.Send(broadcastPacket.GetPoketBytes());
+            }
+
+            BroadcastMessage($"[{disconnectedUser.Username}] Disconnected");
+        }
     }
 }
