@@ -32,7 +32,7 @@ namespace ChatClient.Net
                 {
                     var connectPacket = new PacketBuilder();
                     connectPacket.WrteOpCode(0);
-                    connectPacket.WriteString(username);
+                    connectPacket.WriteMassage(username);
                     _client.Client.Send(connectPacket.GetPoketBytes());
                 }
                 ReadPackets();
@@ -57,6 +57,14 @@ namespace ChatClient.Net
                     }
                 }
             });
+        }
+
+        public void SendMessageToServer(string message)
+        {
+            var messagePacket = new PacketBuilder();
+            messagePacket.WrteOpCode(5);
+            messagePacket.WriteMassage(message);
+            _client.Client.Send(messagePacket.GetPoketBytes());
         }
     }
 }

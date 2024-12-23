@@ -18,7 +18,7 @@ namespace ChatClient.Net.IO
             _ms.WriteByte(opcode);
         }
 
-        public void WriteString(string msg)
+        public void WriteMassage(string msg)
         {
             var msgLength = msg.Length;
             _ms.Write(BitConverter.GetBytes(msgLength));

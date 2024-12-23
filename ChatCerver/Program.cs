@@ -37,5 +37,16 @@ namespace ChatCerver
                 }
             }
         }
+
+        public static void BroadcastMessage(string message)
+        {
+            foreach(var user in _users)
+            {
+                var msgPacket = new PacketBuilder();
+                msgPacket.WrteOpCode(5);
+                msgPacket.WriteMessage(message);
+                user.ClientSocket.Client.Send(msgPacket.GetPoketBytes());
+            }
+        }
     }
 }

@@ -15,7 +15,11 @@ namespace ChatClient.MVVM.ViewModel
     {
         public ObservableCollection<UserModel> Users { get; set; }
         public RelayCommand ConnectToServerCommand { get; set; }
+        public RelayCommand SendMassegwCommand { get; set; }
+
         public string Username { get; set; }
+        public string Message { get; set; }
+
         private Server _server;
 
 
@@ -24,7 +28,9 @@ namespace ChatClient.MVVM.ViewModel
             Users = new ObservableCollection<UserModel>();
             _server= new Server();
             _server.connectedEvent += UserConnected;
-            ConnectToServerCommand = new RelayCommand(o => _server.ConnectToServer(Username), o=> !string.IsNullOrEmpty(Username));
+            ConnectToServerCommand = new RelayCommand(o => _server.ConnectToServer(Username), o => !string.IsNullOrEmpty(Username));
+
+            SendMassegwCommand = new RelayCommand(o => _server.ConnectToServer(Message), o=> !string.IsNullOrEmpty(Message));
         }
 
         private void UserConnected()
