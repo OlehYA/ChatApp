@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChatCerver.Net.IO
 {
-    class PacketBuilder
+    public class PacketBuilder
     {
         MemoryStream _ms;
         public PacketBuilder()
@@ -19,7 +19,7 @@ namespace ChatCerver.Net.IO
             _ms.WriteByte(opcode);
         }
 
-        public void WriteString(string msg)
+        public void WriteMessage(string msg)
         {
             var msgLength = msg.Length;
             _ms.Write(BitConverter.GetBytes(msgLength));

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using ChatCerver.Net.IO;
+using System.Net;
 using System.Net.Sockets;
 
 namespace ChatCerver
@@ -17,12 +18,24 @@ namespace ChatCerver
             {
                 var client = new Client(_listener.AcceptTcpClient());
                 _users.Add(client);
+
+                BroadcastConnetion();
             }
         }
 
         static void BroadcastConnetion()
         {
-
+            foreach(var user in _users)
+            {
+                foreach(var usr in _users)
+                {
+                    var broadcastPacket = new PacketBuilder();
+                    broadcastPacket.WrteOpCode(1);
+                    broadcastPacket.WriteMessage(usr.Username);
+                    broadcastPacket.WriteMessage(usr.UID.ToString());
+                    user.ClientSocket.Client.Send(broadcastPacket.GetPoketBytes());
+                }
+            }
         }
     }
 }
